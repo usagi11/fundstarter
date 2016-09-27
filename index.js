@@ -1,13 +1,20 @@
 var express = require('express')
 var app = express()
 
-/* serves all the static files*/
-app.set('port', (process.env.PORT || 8080))
-app.use(express.static(__dirname + '/public'))
 
-/*serves main page*/
+app.set('port', (process.env.PORT || 8080))
+//app.use(express.static(__dirname + '/public'))
+
+//__dirname returns the directory that the currently executing script is in.
+
 app.get('/', function(request, response) {
-response.sendFile('index.html') 
+    response.sendFile('public/index.html',{root:__dirname})
+
+/* sends an entire HTTP response to the client,                                                                                                                                     
+ including headers and content,                                                                                                                                                     
+ which is why you can only call once*/
+
+
 })
 
 app.listen(app.get('port'), function() {
