@@ -6,13 +6,13 @@ var fileName = 'public/index.html';
 var synchronous = fs.readFileSync(fileName,{root:__dirname});
 var buf = new Buffer(1024);
 
-//send a file by synchronous
-http.createServer(function(request, response){
-    response.writeHeader(200, {'Content-type' : "text/html"});
-    response.write(synchronous);
-    response.end("Synchronous read end");
+//send by 
+http.createServer(function(req, res){
+    res.writeHeader(200, {'Content-type' : 'text/html'});
+    res.write(synchronous);
+    res.end("Synchronous read end");
+}).listen(8080)
 
-}).listen(8080);
 
 
 
