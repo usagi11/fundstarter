@@ -6,10 +6,7 @@ var fileName = 'public/index.html';
 var synchronous = fs.readFileSync(fileName,{root:__dirname});
 var buf = new Buffer(1024);
 
-http.createServer(function(request, response){
-    response.writeHeader(200, {'Content-type' : "text/html"});
-    response.write(synchronous);
-    response.end("Synchronous read end");
+http.createServer(function(req, res){                                                                   fs.readFile(fileName, {root:__dirname}, function(err, data){                                        if(err){                                                                                            res.writeHeader(200, {'Content-type': 'text/html'});                                                res.write("error");                                                                                 res.end();                                                                                          }                                                                                                   else{                                                                                               res.writeHeader(200);                                                                               res.write(data);                                                                                    res.end("Asynchronous read end");                                                                  }                                                                                                })
+}).listen(8080);                                                                                     
 
-}).listen(8080);
 
