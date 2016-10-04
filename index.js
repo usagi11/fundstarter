@@ -3,7 +3,7 @@ var http = require('http');
 var fs = require('fs');
 var fileName = 'public/index.html';
 var buf = new Buffer(1024);
-
+var port = Number(process.env.PORT || 8080);
 //send using fs.open(), fs.stat(), fs.read()
 
 http.createServer(function(res,res){
@@ -24,7 +24,7 @@ http.createServer(function(res,res){
 		});
 	    }
 	});
-}).listen(8080)
+}).listen(port)
 
 
 
