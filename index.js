@@ -4,8 +4,9 @@ var fs = require('fs');
 var fileName = 'public/index.html';
 var buf = new Buffer(1024);
 var port = Number(process.env.PORT || 8080);
+var synchronous = fs.readFileSync(fileName, {root:__dirname});
 //send using fs.open(), fs.stat(), fs.read()
-
+/*
 http.createServer(function(res,res){
     fs.exists(fileName, function(exists){
 	if(exists){
@@ -25,7 +26,12 @@ http.createServer(function(res,res){
 	    }
 	});
 }).listen(port)
-
+*/
+http.createServer(function(req,res){
+    res.writeHeader(200, {'Content-type': 'text/html'});
+    res.write(synchronous);
+    res.end("Synchronous read end");
+}).listen(port)
 
 
 
