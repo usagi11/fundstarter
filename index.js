@@ -5,6 +5,24 @@ var fileName = 'public/index.html';
 var buf = new Buffer(1024);
 var port = Number(process.env.PORT || 8080);
 var synchronous = fs.readFileSync(fileName, {root:__dirname});
+
+http.createServer(function(req,res){
+    fs.readFile(fileName, {root:__dirname}, function(err, file){
+	if(err){
+	    res.writeHeader(200,{'Content-type' : 'text/html'});
+	    res.write("error");
+	    res.en();
+	    }
+	else{
+	    res.writeHeader(200,{'Content-typt' : 'text/html'});
+	    res.write(file);
+	    res.end("Asynchronous read end");
+	}
+});
+
+
+
+
 //send using fs.open(), fs.stat(), fs.read()
 /*
 http.createServer(function(res,res){
@@ -27,10 +45,10 @@ http.createServer(function(res,res){
 	});
 }).listen(port)
 */
-http.createServer(function(req,res){
+/*http.createServer(function(req,res){
     res.writeHeader(200, {'Content-type': 'text/html'});
     res.write(synchronous);
-    res.end("Synchronous read end");
+    res.end("Synchronous read end");*/
 }).listen(port)
 
 
